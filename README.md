@@ -9,15 +9,16 @@ Designed to conceptually understand Go
 - http client
 - JSON Encoding/Decoding (Marshalling / Unmarshalling )
 
-# WIP
+# Work In Progress
+
 
 ## Setup and WeatherReport Struct
 
-- [ ] Set up development environment with Ginkgo and Gomega testing frameworks.
-- [ ] Create a new project structure with necessary directories (e.g., src, test).
-- [ ] Initialize a Git repository and commit initial project setup.
-- [ ] Define the `WeatherReport` struct with fields for weather data (e.g., temperature, humidity, wind speed).
-- [ ] Implement basic methods for initializing and accessing weather data within the struct.
+- [x] Set up development environment with Ginkgo and Gomega testing frameworks.
+- [x] Create a new project structure with necessary directories (e.g., src, test).
+- [x] Initialize a Git repository and commit initial project setup.
+- [x] Define the `WeatherReport` struct with fields for weather data (e.g., temperature, humidity, wind speed).
+- [x] Implement basic methods for initializing and accessing weather data within the struct.
 
 ## Struct Validator and Custom Defined Rule(using go playground)
 
@@ -28,7 +29,7 @@ Designed to conceptually understand Go
 
 ## API Integration
 
-- [ ] Integrate the Open Meteo API (https://api.open-meteo.com/v1/forecast) to collect weather report data for a specific location.
+- [ ] Integrate the [Open Meteo API](https://api.open-meteo.com/v1/forecast) to collect weather report data for a specific location.
 - [ ] Implement methods to make API requests and retrieve weather data in `WeatherReport` struct format.
 - [ ] Write Ginkgo tests using Gomega assertions to validate the API integration.
 - [ ] Test scenarios covering successful API requests and handling of errors or invalid responses.
