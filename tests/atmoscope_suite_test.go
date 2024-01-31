@@ -65,6 +65,50 @@ var _ = Describe("WeatherReportValidator", func() {
 	// More test cases to be added later
 })
 
+var _ = Describe("WeatherReport", func() {
+
+	var wr weather_report.WeatherReport
+
+	BeforeEach( func() {
+		wr = weather_report.NewWeatherReport(0,0,0)
+	})
+
+	Context("SetTemperature", func() {
+
+		It("should correctly set 'temperature'", func() {
+
+			wr.SetTemperature(25)
+			Expect(wr.GetTemperature()).To(Equal(25.0))
+		
+		})
+
+	})
+
+	Context("SetHumidity", func() {
+
+		It("should correctly set 'humidity'", func() {
+
+			wr.SetHumidity(50)
+			Expect(wr.GetHumidity()).To(Equal(50.0))
+		
+		})
+
+	})
+
+	Context("SetWindSpeed", func() {
+
+		It("should correctly set 'windSpeed'", func() {
+
+			wr.SetWindSpeed(75)
+			Expect(wr.GetWindSpeed()).To(Equal(75.0))
+		
+		})
+
+	})
+
+
+	// More test cases to be added later
+})
 
 
 

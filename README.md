@@ -22,10 +22,10 @@ Designed to conceptually understand Go
 
 ## Struct Validator and Custom Defined Rule(using go playground)
 
-- [ ] Implement a struct validator to validate the `WeatherReport` struct against defined rules (e.g., temperature range, humidity range) using Ginkgo and Gomega.
-- [ ] Define custom validation rules for specific fields (e.g., wind speed must be non-negative).
-- [ ] Write Ginkgo tests using Gomega assertions for the struct validator to ensure correct validation behavior.
-- [ ] Test different scenarios including valid data and data violating custom-defined rules.
+- [x] Implement a struct validator to validate the `WeatherReport` struct against defined rules (e.g., temperature range, humidity range) using Ginkgo and Gomega.
+- [x] Define custom validation rules for specific fields (e.g., wind speed must be non-negative).
+- [x] Write Ginkgo tests using Gomega assertions for the struct validator to ensure correct validation behavior.
+- [x] Test different scenarios including valid data and data violating custom-defined rules.
 
 ## API Integration
 
