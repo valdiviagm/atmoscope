@@ -48,7 +48,7 @@ var _ = Describe("WeatherReportValidator", func() {
 	
 		err:= wrv.Validate( wr )
 		Expect(err).To(HaveOccurred())
-		Expect(err.Error()).To(Equal("Wind speed mut be non-negative"))
+		Expect(err.Error()).To(Equal("Wind speed must be non-negative"))
 	})
 
 	// More test cases to be added later

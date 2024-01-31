@@ -16,6 +16,11 @@ func (wrv *WeatherReportValidator) Validate( wr WeatherReport ) error {
 		return errors.New("Humidity is out of valid range")
 	} 
 
+	if wr.GetWindSpeed() < 0.0 {
+		return errors.New("Wind speed must be non-negative")
+	} 
+
+
 	return nil
 }
 
