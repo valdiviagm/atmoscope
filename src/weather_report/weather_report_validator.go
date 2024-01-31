@@ -2,7 +2,7 @@
 
 package weather_report
 
-//import "errors"
+import "errors"
 
 type WeatherReportValidator struct {}
 
@@ -12,6 +12,9 @@ func NewWeatherReportValidator() *WeatherReportValidator{
 
 func (wrv *WeatherReportValidator) Validate( wr WeatherReport ) error {
 	
+	if wr.GetHumidity() < 0.0 || wr.GetHumidity() > 100.0 {
+		return errors.New("Humidity is out of valid range")
+	} 
 
 	return nil
 }

@@ -33,6 +33,24 @@ var _ = Describe("WeatherReportValidator", func() {
 	
 	})
 
+	It("should validate a non-valid 'humidity'", func(){
+		
+		wr := weather_report.NewWeatherReport(0,120,0)
+	
+		err:= wrv.Validate( wr )
+		Expect(err).To(HaveOccurred())
+		Expect(err.Error()).To(Equal("Humidity is out of valid range"))
+	})
+
+	It("should validate a non-valid 'windSpeed'", func(){
+		
+		wr := weather_report.NewWeatherReport(0,0,-10)
+	
+		err:= wrv.Validate( wr )
+		Expect(err).To(HaveOccurred())
+		Expect(err.Error()).To(Equal("Wind speed mut be non-negative"))
+	})
+
 	// More test cases to be added later
 })
 
