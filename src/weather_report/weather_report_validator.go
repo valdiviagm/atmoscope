@@ -20,6 +20,9 @@ func (wrv *WeatherReportValidator) Validate( wr WeatherReport ) error {
 		return errors.New("Wind speed must be non-negative")
 	} 
 
+	if wr.GetTemperature() < -215.15 {
+		return errors.New("Temperture must obey the laws of physics")
+	} 
 
 	return nil
 }

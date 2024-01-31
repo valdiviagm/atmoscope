@@ -51,6 +51,17 @@ var _ = Describe("WeatherReportValidator", func() {
 		Expect(err.Error()).To(Equal("Wind speed must be non-negative"))
 	})
 
+
+	It("should validate a non-valid 'temperature'", func(){
+		
+		wr := weather_report.NewWeatherReport(-300,0,0)
+	
+		err:= wrv.Validate( wr )
+		Expect(err).To(HaveOccurred())
+		Expect(err.Error()).To(Equal("Temperture must obey the laws of physics"))
+	
+	})
+
 	// More test cases to be added later
 })
 
