@@ -2,7 +2,11 @@ package api
 
 import (
 	"io"
+	"errors"
+	"reflect"
 	"net/http"
+	"context"
+	"time"
 	"encoding/json"
 	"github.com/valdiviagm/atmoscope/src/weather_report"
 )
@@ -20,40 +24,62 @@ func NewAPI() *API {
 	} 
 }
 
-func (api *API) FetchWeatherReport( url string ) {
+func (api *API) FetchWeatherReport(url string) {
+    // Create a context with a timeout of 3 seconds
+    ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
+    defer cancel()
 
-	response, err := http.Get(url)
-	if err != nil {
-		api.ErrorChannel <- err
-		return
+
+    // Make the HTTP request within the context
+    req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+    if err != nil {
+        api.ErrorChannel <- err
+        return
+    }
+
+    response, err := http.DefaultClient.Do(req)
+    if err != nil {
+        // Check if the error is due to a timeout
+        if ctx.Err() == context.DeadlineExceeded {
+            api.ErrorChannel <- ctx.Err()
+        } else {
+	    api.ErrorChannel <- err
 	}
-	defer response.Body.Close()
-        
-	
-	body, err := io.ReadAll(response.Body) 
-	if err != nil {
-		api.ErrorChannel <- err
-		return
-	}
+        return
+    }
+    defer response.Body.Close()
 
-	var data weather_report.LocationInfo
+    // Read the response body
+    body, err := io.ReadAll(response.Body)
+    if err != nil {
+        api.ErrorChannel <- err
+        return
+    }
 
-	if err := json.Unmarshal(body, &data); err != nil {
-		api.ErrorChannel <- err
-		return
-	} else {
+    // Unmarshal the response body into the appropriate struct
+    var data weather_report.LocationInfo
+   
+    // Create a copy of the original struct
+    var dataBeforeUnmarshal = data
+    
+    // Unmarshal the response body into the appropriate struct
+    if err := json.Unmarshal(body, &data); err != nil {
+        api.ErrorChannel <- err
+        return
+    }
 
-		wr := weather_report.NewWeatherReport(
-			data.Current.Temperature2m,
-			float64(data.Current.RelativeHumidity2m),
-			data.Current.WindSpeed10m)
-	
-		api.DataChannel <- wr
+    // Check if the struct was modified
+    if reflect.DeepEqual(dataBeforeUnmarshal, data) {
+        api.ErrorChannel <- errors.New("LocationInfo struct was not modified after unmarshaling")
+	return
+    }
 
-	}
-	
-
-
-
+    // Process the data and send it to the DataChannel
+    wr := weather_report.NewWeatherReport(
+        data.Current.Temperature2m,
+        float64(data.Current.RelativeHumidity2m),
+        data.Current.WindSpeed10m,
+    )
+    api.DataChannel <- wr
 
 }
