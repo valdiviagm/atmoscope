@@ -31,8 +31,8 @@ Designed to conceptually understand Go
 
 - [x] Integrate the [Open Meteo API](https://api.open-meteo.com/v1/forecast) to collect weather report data for a specific location.
 - [x] Implement methods to make API requests and retrieve weather data in `WeatherReport` struct format.
-- [ ] Write Ginkgo tests using Gomega assertions to validate the API integration.
-- [ ] Test scenarios covering successful API requests and handling of errors or invalid responses.
+- [x] Write Ginkgo tests using Gomega assertions to validate the API integration.
+- [x] Test scenarios covering successful API requests and handling of errors or invalid responses.
 
 ## Test Coverage, Refinement, and Documentation
 
